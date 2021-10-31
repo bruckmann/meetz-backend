@@ -1,24 +1,10 @@
-# README
+# Sigma.Meetz 👥 
+This is an application for your company to better manage meeting rooms
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## TODO 🔨
+- [ ] Create the data models
+- [ ] Configure migrations
+- [ ] User record with google account
+- [ ] Overview of meeting rooms
+- [ ] Schedule available for each meeting room
+- [ ] Scheduling a meeting room  
