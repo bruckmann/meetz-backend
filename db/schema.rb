@@ -10,25 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_31_230000) do
+ActiveRecord::Schema.define(version: 2021_11_01_020343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "roles", force: :cascade do |t|
-    t.string "roleId"
+  create_table "user_roles", force: :cascade do |t|
     t.string "role"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "userId"
     t.string "name"
-    t.string "password"
     t.string "email"
-    t.bigint "role_id"
-    t.bigint "roleId_id"
-    t.index ["roleId_id"], name: "index_users_on_roleId_id"
-    t.index ["role_id"], name: "index_users_on_role_id"
+    t.string "password_digest"
+    t.bigint "user_role_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_role_id"], name: "index_users_on_user_role_id"
   end
 
 end
