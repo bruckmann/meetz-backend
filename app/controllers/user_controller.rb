@@ -5,19 +5,23 @@ class UserController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-    if @user.save
-      puts 'User created with success'
-      render json: @user, status: 201
-    else
-      puts 'User creation failed'
-      render json: @user, status: 400
+    isUserAlreadyRegistered = User.find_by email: user_params[:email]
+
+    if isUserAlreadyRegistered.present? 
+      return render json: { error: "Este e-mail já possui cadastro no nosso sistema" }, status: 400
     end
+
+    user = User.new(user_params)
+    if !user.save
+      return render json: user.errors, status: 400 
+    end
+
+    return render json: user, status: 201
   end
 
   private 
   def user_params
-    params.require(:user).permit(:name, :password, :email, :user_role_id)
+    params.require(:user).permit(:name, :password, :email, :userRole)
   end
 
 

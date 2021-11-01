@@ -1,4 +1,1 @@
-#  Roles seeds
-
-admin = UserRole.create(role: 'admin')
-employee = UserRole.create(role: 'employee')
+# For now, empty seeds
