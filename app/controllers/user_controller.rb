@@ -1,7 +1,4 @@
-require 'bcrypt'
-
 class UserController < ApplicationController
-  include BCrypt
 
   def index
     render json: User.all
