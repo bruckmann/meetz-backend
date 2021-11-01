@@ -8,10 +8,11 @@ class UserController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       puts 'User created with success'
+      render json: @user, status: 201
     else
       puts 'User creation failed'
+      render json: @user, status: 400
     end
-    render json: @user, status: 201
   end
 
   private 
