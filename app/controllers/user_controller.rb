@@ -1,7 +1,8 @@
 class UserController < ApplicationController
 
   def index
-    render json: User.all
+    users = User.select(:id, :name, :email, :userRole)
+    render json: users
   end
 
   def create
