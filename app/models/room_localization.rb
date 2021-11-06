@@ -1,0 +1,2 @@
+class RoomLocalization < ApplicationRecord
+end
