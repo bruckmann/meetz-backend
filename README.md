@@ -7,4 +7,6 @@ __Sigma.Meetz__ is an application for your company to better manage meeting room
 - [ ] Configure migrations
 - [X] User record
 - [ ] Meeting room record
-- [ ] Scheduling a meeting room  
+- [ ] Scheduling a meeting room
+- [ ] Information about an appointment
+- [ ] Updating appointment 
