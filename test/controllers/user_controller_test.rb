@@ -48,7 +48,7 @@ class UserControllerTest < ActionDispatch::IntegrationTest
 
   # UPDATE METHODS
 
-  test 'PUT /user/id should update a user' do 
+  test 'PUT /user/:id should update a user' do 
     expected_name = 'name updated'
 
     put '/user/1', params: { user: {
@@ -57,4 +57,14 @@ class UserControllerTest < ActionDispatch::IntegrationTest
     updated_user = User.select(:name).find_by id: 1
     assert_equal(expected_name, updated_user[:name])
   end
+
+  # DELETE METHOD
+
+  test 'DELETE /user/:id should delete a user' do
+    delete '/user/1'
+
+    deleted_user = User.find_by id: 1
+    assert_equal(true, deleted_user.nil?)
+  end
+
 end

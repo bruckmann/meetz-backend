@@ -40,6 +40,11 @@ class UserController < ApplicationController
     render json: { success: 'Usuário atualizado com sucesso!' }, status: 200
   end
 
+  def destroy
+    deleted_user = User.find_by id: params[:id]
+    User.delete(deleted_user)
+  end
+
   private
 
   def user_params
