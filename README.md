@@ -3,10 +3,11 @@ __Sigma.Meetz__ is an application for your company to better manage meeting room
 
 ## TODO 🔨
 - [X] Configure the detabase in `database.yml`
-- [ ] Create the data models for all the entities
-- [ ] Configure migrations
-- [X] User record
-- [ ] Meeting room record
-- [ ] Scheduling a meeting room
-- [ ] Information about an appointment
-- [ ] Updating appointment 
+- [X] Create the data models for all the entities
+- [X] Configure migrations
+- [X] User record route
+- [ ] Login route
+- [ ] Meeting room record route
+- [ ] Scheduling a meeting room route 
+- [ ] Information about an appointment route 
+- [ ] Updating appointment route
