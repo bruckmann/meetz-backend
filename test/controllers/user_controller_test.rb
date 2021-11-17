@@ -1,5 +1,6 @@
 require 'test_helper'
 
+
 class UserControllerTest < ActionDispatch::IntegrationTest
   # CREATE METHODS
 
@@ -53,7 +54,7 @@ class UserControllerTest < ActionDispatch::IntegrationTest
 
     put '/user/1', params: { user: {
       name: 'name updated'
-    }}
+    } }
     updated_user = User.select(:name).find_by id: 1
     assert_equal(expected_name, updated_user[:name])
   end
@@ -67,4 +68,8 @@ class UserControllerTest < ActionDispatch::IntegrationTest
     assert_equal(true, deleted_user.nil?)
   end
 
+  test 'GET /user/:id should get a single user' do
+    get '/user/1'
+    assert_response :success
+  end  
 end

@@ -45,6 +45,13 @@ class UserController < ApplicationController
     User.delete(deleted_user)
   end
 
+  def show
+    user_id = params[:id]
+    user = User.select(:id, :email, :name, :userRole).find_by id: user_id
+    render json: user
+  end
+
+
   private
 
   def user_params
