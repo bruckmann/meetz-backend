@@ -1,4 +1,6 @@
 class UserController < ApplicationController
+  before_action :authorize_request, except: :create
+
   def index
     users = User.select(:id, :name, :email, :userRole)
     render json: users
@@ -19,7 +21,6 @@ class UserController < ApplicationController
     end
 
     user = User.new(user_params)
-
     return render json: user.errors, status: 400 unless user.save
 
     render json: user, status: 201
