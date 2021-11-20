@@ -11,5 +11,5 @@ __Sigma.Meetz__ is an application for your company to better manage meeting room
 - [ ] Scheduling a meeting room route 
 - [ ] Information about an appointment route 
 - [ ] Updating appointment route
-- [ ] Update the users methods to use `User.find_by_email` instead of `User.find_by id:`
+- [ ] Update the users methods to use `User.find_by_email` instead of `User.find_by id:`, unless strict necessary
 - [ ] Update the user methods to use `unique` constraint on email instead of verify every time if the e-mail already bean registered
