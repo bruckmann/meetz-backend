@@ -4,6 +4,8 @@ require 'test_helper'
 class UserControllerTest < ActionDispatch::IntegrationTest
   # CREATE METHODS
 
+  token = JsonWebToken.encode(user_id: 1)
+
   test 'POST /user should create a user' do
     post '/user',  params: { user: {
       name: 'test',
@@ -52,9 +54,11 @@ class UserControllerTest < ActionDispatch::IntegrationTest
   test 'PUT /user/:id should update a user' do 
     expected_name = 'name updated'
 
-    put '/user/1', params: { user: {
-      name: 'name updated'
-    } }
+    put '/user/1', 
+      params: { user: {
+        name: 'name updated'
+    }}, 
+      headers: { Authorization: "Bearer #{token}"}
     updated_user = User.select(:name).find_by id: 1
     assert_equal(expected_name, updated_user[:name])
   end
@@ -62,14 +66,14 @@ class UserControllerTest < ActionDispatch::IntegrationTest
   # DELETE METHOD
 
   test 'DELETE /user/:id should delete a user' do
-    delete '/user/1'
+    delete '/user/1', headers: { Authorization: "Bearer #{token}"}
 
     deleted_user = User.find_by id: 1
     assert_equal(true, deleted_user.nil?)
   end
 
   test 'GET /user/:id should get a single user' do
-    get '/user/1'
+    get '/user/1', headers: { Authorization: "Bearer #{token}"}
     assert_response :success
   end  
 end
