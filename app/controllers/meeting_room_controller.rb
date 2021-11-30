@@ -1,8 +1,8 @@
 class MeetingRoomController < ApplicationController
-  before_action :authorize_request, except: :create
+  #before_action :authorize_request
 
   def index
-    meeting_rooms = MeetingRoom.select(:id)
+    meeting_rooms = MeetingRoom.all
     render json: meeting_rooms, status: 200
   end
 
@@ -24,9 +24,15 @@ class MeetingRoomController < ApplicationController
     return render json: { "error": "Não foi possivel cadastrar esta sala" }, status: 400
   end
 
-  def createRoom(specification_id, localization_id)
-    meeting_room = MeetingRoom.new(specification_id, localization_id)
-    return meeting_room
+  def show
+    meeting_room = MeetingRoom.find_by id: params[:id] 
+    return render json: { "error": "Não foi possivel encontrar esta sala" } unless meeting_room.present?
+    return render json: meeting_room
+  end
+
+  def destroy
+    meeting_room = MeetingRoom.find_by id: params[:id] 
+    MeetinRoom.destroy(meeting_room)
   end
 
   private
