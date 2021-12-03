@@ -2,7 +2,7 @@ class MeetingRoomController < ApplicationController
   #before_action :authorize_request
 
   def index
-    meeting_rooms = MeetingRoom.all
+    meeting_rooms = Room.all
     render json: meeting_rooms, status: 200
   end
 
@@ -33,6 +33,21 @@ class MeetingRoomController < ApplicationController
   def destroy
     meeting_room = MeetingRoom.find_by id: params[:id] 
     MeetinRoom.destroy(meeting_room)
+  end
+
+  def update
+    meeting_room = MeetingRoom.find_by id: params[:id]
+    if meeting_room.nil?
+      return render json: { "error": "Sala não foi encontrada"}
+    end
+
+    room_specification = RoomSpecification.find_by id: meeting_room[:room_specification_id]
+    room_localization = RoomLocalization.find_by id: meeting_room[:room_localization_id]
+
+    room_specification.update(meeting_specifications_params)
+    room_localization.update(meeting_room_localization_params)
+
+    return render json: meeting_room
   end
 
   private
