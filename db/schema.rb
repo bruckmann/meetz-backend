@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_06_032220) do
+ActiveRecord::Schema.define(version: 2021_12_03_230009) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,4 +77,21 @@ ActiveRecord::Schema.define(version: 2021_11_06_032220) do
   add_foreign_key "images", "room_specifications"
   add_foreign_key "meeting_rooms", "room_localizations"
   add_foreign_key "meeting_rooms", "room_specifications"
+
+  create_view "rooms", sql_definition: <<-SQL
+      SELECT meeting_rooms.id,
+      room_specifications.name,
+      room_specifications.description,
+      room_specifications.max_person,
+      room_specifications.has_data_show,
+      room_specifications.has_split,
+      room_specifications.size,
+      room_specifications.has_board,
+      room_localizations.floor,
+      room_localizations.number
+     FROM ((meeting_rooms
+       JOIN room_specifications ON ((meeting_rooms.room_specification_id = room_specifications.id)))
+       JOIN room_localizations ON ((meeting_rooms.room_localization_id = room_localizations.id)))
+    GROUP BY meeting_rooms.id, room_specifications.name, room_specifications.description, room_specifications.max_person, room_specifications.has_data_show, room_specifications.has_split, room_specifications.size, room_specifications.has_board, room_localizations.floor, room_localizations.number;
+  SQL
 end
