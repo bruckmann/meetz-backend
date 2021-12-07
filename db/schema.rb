@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_03_230009) do
+ActiveRecord::Schema.define(version: 2021_12_07_012919) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,10 +88,12 @@ ActiveRecord::Schema.define(version: 2021_12_03_230009) do
       room_specifications.size,
       room_specifications.has_board,
       room_localizations.floor,
-      room_localizations.number
-     FROM ((meeting_rooms
+      room_localizations.number,
+      images.image_url
+     FROM (((meeting_rooms
        JOIN room_specifications ON ((meeting_rooms.room_specification_id = room_specifications.id)))
        JOIN room_localizations ON ((meeting_rooms.room_localization_id = room_localizations.id)))
-    GROUP BY meeting_rooms.id, room_specifications.name, room_specifications.description, room_specifications.max_person, room_specifications.has_data_show, room_specifications.has_split, room_specifications.size, room_specifications.has_board, room_localizations.floor, room_localizations.number;
+       JOIN images ON ((meeting_rooms.room_specification_id = images.room_specification_id)))
+    GROUP BY meeting_rooms.id, room_specifications.name, room_specifications.description, room_specifications.max_person, room_specifications.has_data_show, room_specifications.has_split, room_specifications.size, room_specifications.has_board, room_localizations.floor, images.image_url, room_localizations.number;
   SQL
 end
