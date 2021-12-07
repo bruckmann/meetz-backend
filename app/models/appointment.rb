@@ -2,7 +2,6 @@ class Appointment < ApplicationRecord
   has_one :meeting_room
   belongs_to :user
 
-  #validates :end_date, :initial_date, presence: true, availability: true
   validate :cannot_overlap_another_event, :start_date_in_future, :start_before_end
 
   scope :exclude_self, -> id { where.not(id: id) }
