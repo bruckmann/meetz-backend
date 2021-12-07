@@ -20,10 +20,11 @@ class UserController < ApplicationController
       return render json: { error: 'Este e-mail já possui cadastro no nosso sistema' }, status: 400
     end
 
-    user = User.new(user_params)
-    return render json: user.errors, status: 400 unless user.save
+    @user = User.new(user_params)
+    return render json: @user.errors, status: 400 unless @user.save
 
-    render json: user, status: 201
+    token = JsonWebToken.encode(user_id: @user.id)
+    render json: { id: @user.id, token: token }, status: 201
   end
 
   def update
@@ -51,7 +52,6 @@ class UserController < ApplicationController
     user = User.select(:id, :email, :name, :userRole).find_by id: user_id
     render json: user
   end
-
 
   private
 
