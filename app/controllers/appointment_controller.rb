@@ -46,11 +46,9 @@ class AppointmentController < ApplicationController
 
     type = params[:type]
     if type == 'tree_last'
-      puts type
       appointments = Appointment.where(:user_id => params[:user_id]).order(created_at: :desc).limit(3)
       return render json: appointments, status: 200 unless appointments.empty?
     elsif type == 'all'
-      puts type
       appointments = Appointment.where(:user_id => params[:user_id])
       return render json: appointments, status: 200 unless appointments.empty?
     end
