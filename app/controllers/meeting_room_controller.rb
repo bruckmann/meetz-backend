@@ -49,9 +49,7 @@ class MeetingRoomController < ApplicationController
     room_localization = RoomLocalization.find_by id: meeting_room[:room_localization_id]
     image = Image.find_by room_specification_id: meeting_room[:room_specification_id]
 
-    image.update do |i|
-      i.image_url = image_params[:url]
-    end
+    image.update(image_update_params)
     room_specification.update(meeting_specifications_params)
     room_localization.update(meeting_room_localization_params)
 
@@ -62,6 +60,10 @@ class MeetingRoomController < ApplicationController
 
   def image_params
     params.require(:image).permit(:url)
+  end
+
+  def image_update_params
+    params.require(:image).permit(:image_url)
   end
 
   def meeting_specifications_params
