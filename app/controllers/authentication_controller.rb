@@ -10,7 +10,8 @@ class AuthenticationController < ApplicationController
         token: token, 
         exp: time.strftime('%m-%d-%Y %H:%M'), 
         email: @user.email, 
-        role: @user.userRole }, status: :ok
+        role: @user.userRole,
+        id: @user.id }, status: :ok
     else
       render json: { error: 'Usuário ou senha inválidos.' }, status: :unauthorized
     end
