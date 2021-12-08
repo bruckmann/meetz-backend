@@ -49,7 +49,9 @@ class MeetingRoomController < ApplicationController
     room_localization = RoomLocalization.find_by id: meeting_room[:room_localization_id]
     image = Image.find_by room_specification_id: meeting_room[:room_specification_id]
 
-    image.update(image_params)
+    image.update do |i|
+      i.image_url = image_params[:url]
+    end
     room_specification.update(meeting_specifications_params)
     room_localization.update(meeting_room_localization_params)
 
