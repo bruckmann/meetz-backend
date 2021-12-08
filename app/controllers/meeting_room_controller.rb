@@ -38,7 +38,7 @@ class MeetingRoomController < ApplicationController
 
   def destroy
     meeting_room = MeetingRoom.find_by id: params[:id]
-    MeetingRoom.destroy(meeting_room)
+    MeetingRoom.delete(meeting_room)
   end
 
   def update
