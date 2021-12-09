@@ -1,5 +1,5 @@
 class AppointmentController < ApplicationController
-  #before_action :authorize_request
+  before_action :authorize_request
   
   def index
     appointments = Appointment.all
@@ -27,17 +27,20 @@ class AppointmentController < ApplicationController
 
   def update
     appointment = Appointment.find_by id: params[:id]
+    return render json: { "erro": "Não foi possível encontrar essa reserva" } unless appointment.present?
     begin
       Appointment.update(appointment_params)
     rescue Exception => e
-      render json: { "erro": "Ocorreu um erro ao atualizar a reserva" }, staus: 400
+      return render json: { "erro": "Ocorreu um erro ao atualizar a reserva" }, staus: 400
     end
-    render json: { "sucesso": "A reserva foi atualizada com sucesso" }, staus: 200
+    return render json: { "sucesso": "A reserva foi atualizada com sucesso" }, staus: 200
   end
 
   def destroy
     appointment = Appointment.find_by id: params[:id]
-    Appointment.destroy(appointment)
+    return render json: { "erro": "Não foi possível encontrar essa reserva" } unless appointment.present?
+    Appointment.delete(appointment)
+    return render json: { "sucesso": "A reserva foi deletada com sucesso" }
   end
 
   def user_appointments
@@ -67,5 +70,4 @@ class AppointmentController < ApplicationController
       :note
     )
   end
-    
 end
