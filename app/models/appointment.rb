@@ -20,7 +20,7 @@ class Appointment < ApplicationRecord
   end
   
   def overlap_error
-    errors.add(:overlap_error, 'Já existe uma reserva nesse horário para essa sala!')
+    errors.add(:base, 'Já existe uma reserva nesse horário para essa sala!')
   end
 
   def start_date_in_future

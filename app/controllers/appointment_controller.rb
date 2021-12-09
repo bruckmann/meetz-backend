@@ -16,7 +16,8 @@ class AppointmentController < ApplicationController
       appointment = Appointment.create(appointment_params)
       appointment.validate!
     rescue ActiveRecord::RecordInvalid => e
-      return render json: { "error": e.message }, status: 400 
+      message = e.message.split(': ')[1]
+      return render json: { "error": message }, status: 400
     end
 
     return render json: { 
