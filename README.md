@@ -28,12 +28,12 @@ O objetivo desse projeto foi documentar e compreender todo importancia da Analis
 ### Aplicação
 
 - Desenvolvimento da aplicação documentada.
-  [x] Cadastro
-  [x] Login
-  [x] Listagem de salas
-  [x] Aluguel de sala
-  [x] Gerenciamento de salas
-  [ ] Gerenciamento de usuários 🔨
+- [x] Cadastro
+- [x] Login
+- [x] Listagem de salas
+- [x] Aluguel de sala
+- [x] Gerenciamento de salas
+- [ ] Gerenciamento de usuários 🔨
 
 ---
 
